@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 
 private const val TAG = "FgoFragment"
 
-class FgoFragment : Fragment() {
+class ServantListFragment : Fragment() {
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,6 +173,6 @@ class FgoFragment : Fragment() {
 
 
     companion object {
-        fun newInstance() = FgoFragment()
+        fun newInstance() = ServantListFragment()
     }
 }

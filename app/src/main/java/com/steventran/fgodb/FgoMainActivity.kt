@@ -11,8 +11,10 @@ class FgoMainActivity : AppCompatActivity() {
         val isFragmentContainerEmpty = savedInstanceState == null
         if (isFragmentContainerEmpty) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, FgoFragment.newInstance())
+                .add(R.id.fragment_container, ServantListFragment.newInstance())
                 .commit()
         }
     }
+
+
 }
