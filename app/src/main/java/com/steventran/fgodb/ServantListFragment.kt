@@ -17,6 +17,13 @@ import com.squareup.picasso.Picasso
 private const val TAG = "FgoFragment"
 
 class ServantListFragment : Fragment() {
+
+
+    // Callback interface for use with DetailedServantFragment
+    interface Callbacks {
+        fun onServantSelected(servant: Servant)
+    }
+
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {

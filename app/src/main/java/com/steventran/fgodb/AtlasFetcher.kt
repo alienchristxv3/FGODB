@@ -55,11 +55,5 @@ class AtlasFetcher {
         return responseLiveData
     }
 
-    @WorkerThread
-    fun fetchServantPhoto(url: String): Bitmap? {
-        val response: Response<ResponseBody> = atlasApi.getUrlBytes(url).execute()
-        val bitmap = response.body()?.byteStream().use(BitmapFactory::decodeStream)
-        Log.i(TAG, "Decoded bitmap=$bitmap from Response=$response")
-        return bitmap
-    }
+
 }
