@@ -43,6 +43,38 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
             val skill = DetailedSkill()
             val skillCooldownJsonArray = skillJsonElement.asJsonObject
                 .getAsJsonArray("coolDown").asIterable() as List<JsonElement>
+            val skillFunctionsJsonArray = skillJsonElement.asJsonObject
+                .getAsJsonArray("functions")
+            val skillFunctionsList = mutableListOf<DetailedSkill.SkillFunction>()
+            skillFunctionsJsonArray.forEach {functionJsonElement ->
+                // Check to only use resources for functions that are for the player
+                if (getStringAttribute(functionJsonElement, "funcTargetTeam") != "enemy" ) {
+                    val skillValuesJsonArray = functionJsonElement.asJsonObject
+                        .getAsJsonArray("svals")
+                    val function = skill.SkillFunction()
+                    val skillValues = mutableListOf<DetailedSkill.SkillFunction.SkillValue>()
+
+                    skillValuesJsonArray.forEach { skillValueJsonElement ->
+                        val skillValue = function.SkillValue()
+                        skillValue.apply {
+                            rate = getIntegerAttribute(skillValueJsonElement, "Rate")
+                            turnCount = getIntegerAttribute(skillValueJsonElement, "Turn")
+                            value = getIntegerAttribute(skillValueJsonElement, "Value")
+                        }
+                        skillValues.add(skillValue)
+
+
+                    }
+                    function.apply {
+                        targetType = getStringAttribute(functionJsonElement, "funcTargetType")
+                        //Buff Icon Url isn't always there so will implement later
+                        functDescrip = getStringAttribute(functionJsonElement, "funcPopupText")
+                        this.skillValues = skillValues
+                    }
+                    skillFunctionsList.add(function)
+                }
+
+            }
             skill.apply {
                 name = getStringAttribute(skillJsonElement, "name")
                 description = getStringAttribute(skillJsonElement, "detail")
@@ -51,8 +83,10 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
                 coolDowns = skillCooldownJsonArray.map { jsonElement ->
                     jsonElement.asInt
                 }
-                
+                skillFunctions = skillFunctionsList
+
             }
+            skillList.add(skill)
 
         }
 
@@ -68,7 +102,7 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
             hpBase = getIntegerAttribute(json, "hpBase")
             hpMax = getIntegerAttribute(json, "hpMax")
             characterAscensionUrls = servantAscensionGraphUrls
-
+            skills = skillList
         }
 
         return detailedServantObject
