@@ -1,6 +1,8 @@
 package com.steventran.fgodb
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,9 +23,9 @@ class ServantListFragment : Fragment() {
 
     // Callback interface for use with DetailedServantFragment
     interface Callbacks {
-        fun onServantSelected(servant: Servant)
+        fun onServantSelected(servantId: Int)
     }
-
+    private var callbacks: Callbacks? = null
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,11 @@ class ServantListFragment : Fragment() {
         servantListViewModel =
             ViewModelProvider(this).get(ServantListViewModel::class.java)
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callbacks = context as Callbacks?
     }
 
     override fun onCreateView(
@@ -56,16 +63,25 @@ class ServantListFragment : Fragment() {
 
     }
 
-    private inner class ServantHolder(view: View): RecyclerView.ViewHolder(view) {
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
+    }
 
+    private inner class ServantHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener {
 
+        private lateinit var servant: Servant
         private val servantNameTextView: TextView = view.findViewById(R.id.servant_name)
         private val servantRarityImageView: ImageView = view.findViewById(R.id.servant_rarity)
         private val servantClassImageView: ImageView = view.findViewById(R.id.servant_class)
         private val servantFaceImageView: ImageView = view.findViewById(R.id.servant_face)
 
+        init {
+            view.setOnClickListener(this)
+        }
 
         fun bindServant(servant: Servant) {
+            this.servant = servant
             servantNameTextView.text = servant.servantName
             servantRarityImageView.setImageDrawable(
                 ResourcesCompat.getDrawable(resources, selectRarity(servant), null)
@@ -81,6 +97,11 @@ class ServantListFragment : Fragment() {
 
 
 
+        }
+
+        override fun onClick(view: View?) {
+            Log.d(TAG, "Servant ViewHolderClicked")
+            callbacks?.onServantSelected(servant.collectionNo)
         }
 
         private fun selectClass(servant: Servant): Int {

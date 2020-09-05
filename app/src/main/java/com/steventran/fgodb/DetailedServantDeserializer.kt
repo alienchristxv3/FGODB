@@ -1,29 +1,33 @@
 package com.steventran.fgodb
 
+import android.util.Log
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.steventran.fgodb.api.DetailedSkill
 import java.lang.reflect.Type
 
+private const val TAG = "ServantDeserializer"
 class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
         context: JsonDeserializationContext?
     ): DetailedServant {
+
         val detailedServantObject = DetailedServant()
 
         val servantExtraAssets = json?.asJsonObject?.getAsJsonObject("extraAssets")
         val servantCharacterGraphs = servantExtraAssets?.getAsJsonObject("charaGraph")
-        val servantAscensions = servantCharacterGraphs?.getAsJsonObject("ascensions")
+        val servantAscensions = servantCharacterGraphs?.getAsJsonObject("ascension")
         val costumes = servantCharacterGraphs?.getAsJsonObject("costume")
         val skillsArray = json?.asJsonObject?.get("skills")?.asJsonArray
 
-
+        Log.d(TAG, "$servantExtraAssets")
         // Code to assign servant image urls to a list
         val servantAscensionGraphUrls = mutableListOf<String>()
         servantAscensions?.keySet()?.forEach {key ->
+            Log.d(TAG, "Fetched servantAscension key: $key")
             servantAscensions?.get(key)?.asString?.let {
                 // grabs the links of the ascension urls buy obtaining the keys and using them
                 servantAscensionGraphUrls.add(
@@ -31,10 +35,17 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
                 )
             }
         }
-        if (costumes?.keySet()?.isNotEmpty()!!) {
-            costumes?.keySet().forEach { key->
-                servantAscensionGraphUrls.add(costumes.getAsJsonObject(key).asString)
+        Log.d(TAG, "Fetched ascension urls: $servantAscensionGraphUrls.")
+        if (costumes?.keySet()?.isNotEmpty() == true) {
+            costumes?.keySet()?.forEach { key->
+                costumes?.
+                get(key)?.
+                asString?.let {
+                    Log.d(TAG, "Fetched servant costume url: $it")
+                    servantAscensionGraphUrls.add(it) }
             }
+
+
         }
 
         // Code to turn skillsArray into DetailedSkill objects
@@ -42,7 +53,7 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
         skillsArray?.forEach {skillJsonElement ->
             val skill = DetailedSkill()
             val skillCooldownJsonArray = skillJsonElement.asJsonObject
-                .getAsJsonArray("coolDown").asIterable() as List<JsonElement>
+                .getAsJsonArray("coolDown").asIterable()
             val skillFunctionsJsonArray = skillJsonElement.asJsonObject
                 .getAsJsonArray("functions")
             val skillFunctionsList = mutableListOf<DetailedSkill.SkillFunction>()
@@ -108,10 +119,10 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
         return detailedServantObject
 
     }
-    private fun getStringAttribute(json: JsonElement, key: String): String{
-        return json.asJsonObject.get(key).asString
+    private fun getStringAttribute(json: JsonElement?, key: String): String{
+        return json?.asJsonObject?.get(key)?.asString ?: ""
     }
-    private fun getIntegerAttribute(json: JsonElement, key: String): Int {
-        return json.asJsonObject.get(key).asInt
+    private fun getIntegerAttribute(json: JsonElement?, key: String): Int {
+        return json?.asJsonObject?.get(key)?.asInt ?: 0
     }
 }

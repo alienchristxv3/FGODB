@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.GsonBuilder
 import com.steventran.fgodb.api.AtlasApi
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -21,9 +22,12 @@ class AtlasFetcher {
     private val atlasApi: AtlasApi
 
     init {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(DetailedServant::class.java, DetailedServantDeserializer())
+            .create()
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://api.atlasacademy.io")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         atlasApi = retrofit.create(AtlasApi::class.java)
@@ -54,6 +58,24 @@ class AtlasFetcher {
 
         return responseLiveData
     }
+    fun fetchDetailedServant(collectionID: Int): LiveData<DetailedServant> {
+        val responseLiveData: MutableLiveData<DetailedServant> = MutableLiveData()
+        val atlasRequest: Call<DetailedServant> = atlasApi.getDetailedServant(collectionID)
 
+        atlasRequest.enqueue(object : Callback<DetailedServant> {
+            override fun onFailure(call: Call<DetailedServant>, t: Throwable) {
+                Log.e(TAG, "Failure to fetch servants", t)
+            }
 
+            override fun onResponse(
+                call: Call<DetailedServant>,
+                response: Response<DetailedServant>
+            ) {
+                Log.d(TAG, "Fetched servant $collectionID successfully")
+                var servant: DetailedServant? = response.body()
+                responseLiveData.value = servant
+            }
+        })
+        return responseLiveData
+    }
 }

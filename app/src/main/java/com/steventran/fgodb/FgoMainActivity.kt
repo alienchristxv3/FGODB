@@ -2,6 +2,7 @@ package com.steventran.fgodb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class FgoMainActivity : AppCompatActivity(), ServantListFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,10 +17,10 @@ class FgoMainActivity : AppCompatActivity(), ServantListFragment.Callbacks {
         }
     }
 
-    override fun onServantSelected(servant: Servant) {
-        val fragment = DetailedServantFragment.newInstance(servant)
+    override fun onServantSelected(servantId: Int) {
+
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .replace(R.id.fragment_container, DetailedServantFragment.newInstance(servantId))
             .addToBackStack(null)
             .commit()
     }

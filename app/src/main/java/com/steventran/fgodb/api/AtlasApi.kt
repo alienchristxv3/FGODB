@@ -1,5 +1,6 @@
 package com.steventran.fgodb.api
 
+import com.steventran.fgodb.DetailedServant
 import com.steventran.fgodb.Servant
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -12,5 +13,5 @@ interface AtlasApi {
     fun getServants(): Call<List<Servant>>
 
     @GET("nice/NA/servant/{servantID}")
-    fun getDetailedServant(@Path("servantID") servantCollectionNo: Int)
+    fun getDetailedServant(@Path("servantID") servantCollectionNo: Int): Call<DetailedServant>
 }
