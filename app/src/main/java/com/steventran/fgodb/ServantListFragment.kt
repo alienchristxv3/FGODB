@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -28,6 +30,7 @@ class ServantListFragment : Fragment() {
     private var callbacks: Callbacks? = null
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
+    private lateinit var servantProgressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,8 +51,10 @@ class ServantListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_fgodb, container, false)
         servantRecyclerView = view.findViewById(R.id.servant_recycler_view)
-        servantRecyclerView.layoutManager = LinearLayoutManager(context)
+        servantProgressBar = view.findViewById(R.id.servant_list_progress_bar)
 
+        servantRecyclerView.layoutManager = LinearLayoutManager(context)
+        servantRecyclerView.visibility = View.GONE
         return view
     }
 
@@ -59,6 +64,10 @@ class ServantListFragment : Fragment() {
             viewLifecycleOwner,
             Observer {servants ->
                 servantRecyclerView.adapter = ServantAdapter(servants)
+
+                servantProgressBar.visibility = View.GONE
+                servantRecyclerView.visibility = View.VISIBLE
+
             })
 
     }
@@ -196,6 +205,7 @@ class ServantListFragment : Fragment() {
             val servant = servants[position]
             holder.bindServant(servant)
         }
+
 
     }
 
