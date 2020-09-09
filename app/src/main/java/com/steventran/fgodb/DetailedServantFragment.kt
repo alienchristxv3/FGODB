@@ -1,5 +1,8 @@
 package com.steventran.fgodb
 
+import android.content.res.ColorStateList
+import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +31,8 @@ class DetailedServantFragment: Fragment() {
     private lateinit var ascension2Button: Button
     private lateinit var ascension3Button: Button
     private lateinit var ascension4Button: Button
+    private lateinit var ascensionButtonList: List<Button>
+
     private var servantCollectionNo by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +56,17 @@ class DetailedServantFragment: Fragment() {
         ascension2Button = view.findViewById(R.id.ascension_2_button)
         ascension3Button = view.findViewById(R.id.ascension_3_button)
         ascension4Button = view.findViewById(R.id.ascension_4_button)
+        ascensionButtonList = listOf(
+            ascension1Button,
+            ascension2Button,
+            ascension3Button,
+            ascension4Button
+        )
 
 
-        ascension1Button.setOnClickListener(onAscensionButtonClicked(ascension1Button))
-        ascension2Button.setOnClickListener(onAscensionButtonClicked(ascension2Button))
-        ascension3Button.setOnClickListener(onAscensionButtonClicked(ascension3Button))
-        ascension4Button.setOnClickListener(onAscensionButtonClicked(ascension4Button))
+        ascensionButtonList.forEach { button ->
+            button.setOnClickListener(onAscensionButtonClicked(button))
+        }
         return view
     }
 
@@ -76,16 +87,30 @@ class DetailedServantFragment: Fragment() {
     }
 
     fun onAscensionButtonClicked(view: View): View.OnClickListener? {
+
+
         return View.OnClickListener {
+            ascensionButtonList.forEach { button ->
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    button.backgroundTintList = ColorStateList.valueOf(
+                        resources.getColor(R.color.colorUnselectedAscensionButton,
+                            context?.theme
+                        ))
+                }
+            }
             when (view.id) {
                 R.id.ascension_1_button -> insertImageIntoView(servantPortraitImageView,
-                    detailedServant.characterAscensionUrls[0])
+                        detailedServant.characterAscensionUrls[0])
                 R.id.ascension_2_button -> insertImageIntoView(servantPortraitImageView,
                     detailedServant.characterAscensionUrls[1])
                 R.id.ascension_3_button -> insertImageIntoView(servantPortraitImageView,
                     detailedServant.characterAscensionUrls[2])
                 R.id.ascension_4_button -> insertImageIntoView(servantPortraitImageView,
                     detailedServant.characterAscensionUrls[3])
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                view.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.colorAscensionButton, context?.theme
+                ))
             }
         }
     }
