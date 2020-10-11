@@ -2,21 +2,25 @@ package com.steventran.fgodb
 
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.steventran.fgodb.api.DetailedSkill
 import kotlin.properties.Delegates
 
 private const val TAG = "DetailedServantFragment"
@@ -32,6 +36,7 @@ class DetailedServantFragment: Fragment() {
     private lateinit var ascension3Button: Button
     private lateinit var ascension4Button: Button
     private lateinit var ascensionButtonList: List<Button>
+    private lateinit var skillRecyclerView: RecyclerView
 
     private var servantCollectionNo by Delegates.notNull<Int>()
 
@@ -67,6 +72,13 @@ class DetailedServantFragment: Fragment() {
         ascensionButtonList.forEach { button ->
             button.setOnClickListener(onAscensionButtonClicked(button))
         }
+        skillRecyclerView = view.findViewById(R.id.skill_recycler_view)
+        skillRecyclerView.layoutManager = LinearLayoutManager(context)
+        skillRecyclerView.addItemDecoration(
+            VerticalSkillPaddingDecorationItem(
+            24 * (context?.resources?.displayMetrics?.density?.toInt() ?: 1)
+        )
+        )
         return view
     }
 
@@ -81,6 +93,9 @@ class DetailedServantFragment: Fragment() {
                     servantPortraitImageView,
                     servant.characterAscensionUrls[0]
                     )
+
+                skillRecyclerView.adapter = SkillAdapter(servant.skills)
+
 
             }
         )
@@ -118,6 +133,97 @@ class DetailedServantFragment: Fragment() {
         Picasso.get()
             .load(url)
             .into(view)
+    }
+    private inner class SkillHolder(view: View): RecyclerView.ViewHolder(view) {
+
+        private val skillIconView: ImageView = view.findViewById(R.id.skill_icon)
+        private val skillNameTextView: TextView = view.findViewById(R.id.skill_name)
+        private val skillDescriptionTextView: TextView = view.findViewById(R.id.skill_description)
+        private val skillBuffTableLayout: TableLayout =
+            view.findViewById(R.id.skill_buff_table_layout)
+
+        fun bindSkill(detailedSkill: DetailedSkill) {
+            insertImageIntoView(skillIconView, detailedSkill.iconUrl)
+            skillNameTextView.text = detailedSkill.name
+            skillDescriptionTextView.text = detailedSkill.description
+            val layoutParams: TableRow.LayoutParams = TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT
+            )
+            val cooldownsTableRow = TableRow(context)
+            cooldownsTableRow.layoutParams = layoutParams
+            cooldownsTableRow.addView(TextView(context))
+            for(i in 0..9) {
+                val coolDown = detailedSkill.coolDowns.get(i)
+                val cooldownTextView = TextView(context)
+                cooldownTextView.text = coolDown.toString()
+                cooldownTextView.background = ResourcesCompat.getDrawable(
+                    resources, R.drawable.skill_border, context?.theme
+                )
+                cooldownTextView.layoutParams = TableRow.LayoutParams(i+1)
+                cooldownsTableRow.addView(cooldownTextView)
+            }
+            skillBuffTableLayout.addView(cooldownsTableRow)
+            detailedSkill.skillFunctions.forEach{skillFunction ->
+                val skillTableRow = TableRow(context)
+
+                val funcDescriptionTextView = TextView(context)
+                funcDescriptionTextView.apply {
+                    background = ResourcesCompat.getDrawable(
+                        resources, R.drawable.skill_border, context?.theme
+                    )
+                }
+
+                skillTableRow.layoutParams = layoutParams
+                funcDescriptionTextView.text = skillFunction.functDescrip
+                skillTableRow.addView(funcDescriptionTextView)
+                skillFunction.skillValues.forEach { skillValue ->
+                    val skillValueTextView = TextView(context)
+                    skillValueTextView.text = skillValue.value.toString()
+                    skillValueTextView.background = ResourcesCompat.getDrawable(
+                        resources, R.drawable.skill_border, context?.theme
+                    )
+                    skillTableRow.addView(skillValueTextView)
+                }
+
+                skillBuffTableLayout.addView(skillTableRow)
+
+            }
+            detailedSkill.skillFunctions
+
+
+        }
+
+    }
+
+    private inner class SkillAdapter(val skills: List<DetailedSkill>): RecyclerView.Adapter<SkillHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillHolder {
+            val view = layoutInflater.inflate(R.layout.list_item_skill, parent, false)
+            return SkillHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: SkillHolder, position: Int) {
+            val skill: DetailedSkill = skills[position]
+            holder.bindSkill(skill)
+
+
+        }
+
+        override fun getItemCount(): Int {
+            return skills.size
+        }
+
+    }
+
+    private inner class VerticalSkillPaddingDecorationItem(val verticalSpaceHeight: Int): RecyclerView.ItemDecoration() {
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.bottom = verticalSpaceHeight
+        }
     }
 
     companion object {
