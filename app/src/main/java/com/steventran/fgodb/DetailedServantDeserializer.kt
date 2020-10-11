@@ -62,11 +62,11 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
                 if (getStringAttribute(functionJsonElement, "funcTargetTeam") != "enemy" ) {
                     val skillValuesJsonArray = functionJsonElement.asJsonObject
                         .getAsJsonArray("svals")
-                    val function = skill.SkillFunction()
+                    val function = DetailedSkill.SkillFunction()
                     val skillValues = mutableListOf<DetailedSkill.SkillFunction.SkillValue>()
 
                     skillValuesJsonArray.forEach { skillValueJsonElement ->
-                        val skillValue = function.SkillValue()
+                        val skillValue = DetailedSkill.SkillFunction.SkillValue()
                         skillValue.apply {
                             rate = getIntegerAttribute(skillValueJsonElement, "Rate")
                             turnCount = getIntegerAttribute(skillValueJsonElement, "Turn")

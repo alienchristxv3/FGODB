@@ -16,13 +16,13 @@ class DetailedSkill() {
     lateinit var coolDowns: List<Int>
     lateinit var skillFunctions: List<SkillFunction>
 
-    inner class SkillFunction() {
+    class SkillFunction() {
         lateinit var targetType: String
         lateinit var buffIconUrl: String
         lateinit var functDescrip: String
         lateinit var skillValues: List<SkillValue>
 
-        inner class SkillValue() {
+         class SkillValue() {
             var rate by Delegates.notNull<Int>()
             var turnCount: Int? = null // This is because turnCount is not always an attribute
             var value by Delegates.notNull<Int>()
