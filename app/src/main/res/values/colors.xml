@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorAscensionButton">#32f0b7</color>
     <color name="colorUnselectedAscensionButton">#6c9487</color>
+    <color name="colorHeader">#11438e</color>
 </resources>
