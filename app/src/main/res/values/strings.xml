@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FGODB</string>
-    <string name="ascension_2_button">2nd Ascension</string>
-    <string name="ascension_1_button">1st Ascension</string>
-    <string name="ascension_4_button">4th Ascension</string>
-    <string name="ascension_3_button">3rd Ascension</string>
+    <string name="ascension_2_button">Stage 2</string>
+    <string name="ascension_1_button">Stage 1</string>
+    <string name="ascension_4_button">Stage 4</string>
+    <string name="ascension_3_button">Stage 3</string>
 </resources>
