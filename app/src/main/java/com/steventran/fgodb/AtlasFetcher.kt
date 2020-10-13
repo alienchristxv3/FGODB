@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.GsonBuilder
 import com.steventran.fgodb.api.AtlasApi
+import com.steventran.fgodb.api.BuffTypes
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +21,7 @@ private const val TAG = "AtlasFetcher"
 class AtlasFetcher {
 
     private val atlasApi: AtlasApi
+    private val buffType: Array<BuffTypes> = BuffTypes.values()
 
     init {
         val gson = GsonBuilder()
