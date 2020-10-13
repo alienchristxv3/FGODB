@@ -69,9 +69,16 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:scrollbarStyle="insideOverlay">
     <TableLayout
         android:id="@+id/skill_buff_table_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/skill_border"/>
+        android:background="@drawable/skill_border"
+        />
+    </HorizontalScrollView>
 </LinearLayout>
