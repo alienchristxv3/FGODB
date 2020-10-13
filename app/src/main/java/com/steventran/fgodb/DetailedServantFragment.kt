@@ -146,50 +146,8 @@ class DetailedServantFragment: Fragment() {
             insertImageIntoView(skillIconView, detailedSkill.iconUrl)
             skillNameTextView.text = detailedSkill.name
             skillDescriptionTextView.text = detailedSkill.description
-            val layoutParams: TableRow.LayoutParams = TableRow.LayoutParams(
-                TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT
-            )
-            val cooldownsTableRow = TableRow(context)
-            cooldownsTableRow.layoutParams = layoutParams
-            cooldownsTableRow.addView(TextView(context))
-            for(i in 0..9) {
-                val coolDown = detailedSkill.coolDowns.get(i)
-                val cooldownTextView = TextView(context)
-                cooldownTextView.text = coolDown.toString()
-                cooldownTextView.background = ResourcesCompat.getDrawable(
-                    resources, R.drawable.skill_border, context?.theme
-                )
-                cooldownTextView.layoutParams = TableRow.LayoutParams(i+1)
-                cooldownsTableRow.addView(cooldownTextView)
-            }
-            skillBuffTableLayout.addView(cooldownsTableRow)
-            detailedSkill.skillFunctions.forEach{skillFunction ->
-                val skillTableRow = TableRow(context)
+            createBuffValueTable(detailedSkill, skillBuffTableLayout)
 
-                val funcDescriptionTextView = TextView(context)
-                funcDescriptionTextView.apply {
-                    background = ResourcesCompat.getDrawable(
-                        resources, R.drawable.skill_border, context?.theme
-                    )
-                }
-
-                skillTableRow.layoutParams = layoutParams
-                funcDescriptionTextView.text = skillFunction.functDescrip
-                skillTableRow.addView(funcDescriptionTextView)
-                skillFunction.skillValues.forEach { skillValue ->
-                    val skillValueTextView = TextView(context)
-                    skillValueTextView.text = skillValue.value.toString()
-                    skillValueTextView.background = ResourcesCompat.getDrawable(
-                        resources, R.drawable.skill_border, context?.theme
-                    )
-                    skillTableRow.addView(skillValueTextView)
-                }
-
-                skillBuffTableLayout.addView(skillTableRow)
-
-            }
-            detailedSkill.skillFunctions
 
 
         }
@@ -223,6 +181,58 @@ class DetailedServantFragment: Fragment() {
             state: RecyclerView.State
         ) {
             outRect.bottom = verticalSpaceHeight
+        }
+    }
+
+    private fun createBuffValueTable(detailedSkill: DetailedSkill, skillBuffTableLayout: TableLayout)
+    {
+        val layoutParams: TableRow.LayoutParams = TableRow.LayoutParams(
+            TableRow.LayoutParams.MATCH_PARENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+        val cooldownsTableRow = TableRow(context).apply {
+            this.layoutParams = layoutParams
+            addView(TextView(context))
+        }
+        for(i in 0..9) {
+            val coolDown = detailedSkill.coolDowns.get(i)
+            val cooldownTextView = TextView(context)
+            cooldownTextView.text = coolDown.toString()
+            cooldownTextView.background = ResourcesCompat.getDrawable(
+                resources, R.drawable.skill_border, context?.theme
+            )
+            cooldownTextView.layoutParams = TableRow.LayoutParams(i+1)
+            cooldownsTableRow.addView(cooldownTextView)
+        }
+        skillBuffTableLayout.addView(cooldownsTableRow)
+        detailedSkill.skillFunctions.forEach{skillFunction ->
+            val skillTableRow = TableRow(context)
+
+            val funcDescriptionTextView = TextView(context)
+            funcDescriptionTextView.apply {
+                background = ResourcesCompat.getDrawable(
+                    resources, R.drawable.skill_border, context?.theme
+                )
+            }
+
+            skillTableRow.layoutParams = layoutParams
+            funcDescriptionTextView.text = skillFunction.functDescrip
+            skillTableRow.addView(funcDescriptionTextView)
+            skillFunction.skillValues.forEach { skillValue ->
+                val skillValueTextView = TextView(context)
+                skillValueTextView.text = if (skillValue.value  == 0) {
+                    "-"
+                } else {
+                    skillValue.value.toString()
+                }
+                skillValueTextView.background = ResourcesCompat.getDrawable(
+                    resources, R.drawable.skill_border, context?.theme
+                )
+                skillTableRow.addView(skillValueTextView)
+            }
+
+            skillBuffTableLayout.addView(skillTableRow)
+
         }
     }
 
