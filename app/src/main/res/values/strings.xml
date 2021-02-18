@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FGODB</string>
+    <string name="filter_list">Filter</string>
+    <string name="search_servant">Search Servant</string>
 </resources>

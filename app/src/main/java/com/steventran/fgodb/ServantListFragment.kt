@@ -1,11 +1,8 @@
 package com.steventran.fgodb
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.*
+import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,7 +21,7 @@ class ServantListFragment : Fragment() {
 
         servantListViewModel =
             ViewModelProvider(this).get(ServantListViewModel::class.java)
-
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -46,6 +43,29 @@ class ServantListFragment : Fragment() {
             Observer {servants ->
                 servantRecyclerView.adapter = ServantAdapter(servants)
             })
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.servant_search_menu, menu)
+        val searchView = menu.findItem(R.id.action_search_servant).actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val servantAdapter = servantRecyclerView.adapter as ServantAdapter
+                servantAdapter.filter.filter(query)
+
+                return false
+            }
+
+            override fun onQueryTextChange(query: String?): Boolean {
+                val servantAdapter = servantRecyclerView.adapter as ServantAdapter
+                servantAdapter.filter.filter(query)
+
+                return false
+            }
+
+        });
 
     }
 
@@ -151,22 +171,55 @@ class ServantListFragment : Fragment() {
                 }
         }
     }
-    private inner class ServantAdapter(private val servants: List<Servant>) : RecyclerView.Adapter<ServantHolder>() {
+    private inner class ServantAdapter(private val servants: List<Servant>) : RecyclerView.Adapter<ServantHolder>(), Filterable {
+        private var filteredServants: List<Servant> = servants
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServantHolder {
             val view = layoutInflater.inflate(
                 R.layout.list_item_servants,
                 parent,
                 false)
-            parent.removeView(view)
             return ServantHolder(view)
         }
 
-        override fun getItemCount(): Int = servants.size
+        override fun getItemCount(): Int = filteredServants.size
 
 
         override fun onBindViewHolder(holder: ServantHolder, position: Int) {
-            val servant = servants[position]
+            val servant = filteredServants[position]
             holder.bindServant(servant)
+        }
+
+        override fun getFilter() : Filter {
+            return object: Filter() {
+                override fun performFiltering(charSequence: CharSequence?): FilterResults {
+
+                    filteredServants = if(charSequence.isNullOrBlank()) {
+                        servants
+                    } else {
+                        var filteredList = mutableListOf<Servant>()
+                        servants.forEach {servant: Servant ->
+                            if(servant.servantName.toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                                filteredList.add(servant)
+                            }
+                        }
+                        filteredList
+                    }
+
+                    val filteredResults = FilterResults()
+                    filteredResults.values = filteredServants
+
+                    return filteredResults
+                }
+
+                override fun publishResults(charSeq: CharSequence?, filteredResults: FilterResults?) {
+                    if (filteredResults != null) {
+                        filteredServants = filteredResults.values as List<Servant>
+                    }
+                    notifyDataSetChanged()
+                }
+
+            }
         }
 
     }
