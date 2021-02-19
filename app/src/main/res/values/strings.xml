@@ -9,4 +9,20 @@
     <string name="three_star_symbol">3★</string>
     <string name="four_star_symbol">4★</string>
     <string name="five_star_symbol">5★</string>
+    <string name="class_text">Class</string>
+
+    <string name="saber_text">Saber</string>
+    <string name="archer_text">Archer</string>
+    <string name="lancer_text">Lancer</string>
+    <string name="rider_text">Rider</string>
+    <string name="assassin_text">Assassin</string>
+    <string name="caster_text">Caster</string>
+    <string name="berserker_text">Berserker</string>
+    <string name="ruler_text">Ruler</string>
+    <string name="avenger_text">Avenger</string>
+    <string name="moon_cancer_text">Moon Cancer</string>
+    <string name="alter_ego_text">Alter Ego</string>
+    <string name="foreigner_text">Foreigner</string>
+    <string name="shielder_text">Shielder</string>
+
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -65,4 +66,415 @@
         app:layout_constraintStart_toStartOf="@id/checkbox_one_star"
         app:layout_constraintTop_toBottomOf="@id/checkbox_four_star"
         android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/class_filter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/class_text"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/rarity_filter_title"
+        app:layout_constraintTop_toTopOf="@+id/rarity_filter_title" />
+    <CheckBox
+        android:id="@+id/checkbox_saber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/class_filter_title"
+        app:layout_constraintTop_toBottomOf="@id/class_filter_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/saber_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_saber_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_saber"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_saber"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_saber"
+        android:contentDescription="@string/saber_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saber_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_saber"
+        app:layout_constraintStart_toEndOf="@+id/saber_icon"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_saber"
+        android:layout_marginStart="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_lancer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_saber"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_saber"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/lancer_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_lancer_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_lancer"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_lancer"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_lancer"
+        android:contentDescription="@string/lancer_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lancer_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_lancer"
+        app:layout_constraintStart_toEndOf="@+id/lancer_icon"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_lancer"
+        android:layout_marginStart="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_archer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_lancer"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lancer"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/archer_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_archer_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_archer"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_archer"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_archer"
+        android:contentDescription="@string/archer_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archer_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_archer"
+        app:layout_constraintStart_toEndOf="@+id/archer_icon"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_archer"
+        android:layout_marginStart="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_rider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_archer"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_archer"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/rider_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_rider_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_rider"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_rider"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_rider"
+        android:contentDescription="@string/rider_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rider_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_rider"
+        app:layout_constraintStart_toEndOf="@+id/rider_icon"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_rider"
+        android:layout_marginStart="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_assassin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_rider"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_rider"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/assassin_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_assassin_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_assassin"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_assassin"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_assassin"
+        android:contentDescription="@string/assassin_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assassin_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_assassin"
+        app:layout_constraintStart_toEndOf="@+id/assassin_icon"
+        app:layout_constraintTop_toTopOf="@+id/assassin_icon"
+        android:layout_marginStart="8dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_caster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/checkbox_assassin"
+
+        app:layout_constraintTop_toBottomOf="@id/checkbox_assassin" />
+
+    <ImageView
+        android:id="@+id/caster_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_caster_gold"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_caster"
+        app:layout_constraintStart_toEndOf="@+id/checkbox_caster"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_caster"
+        android:contentDescription="@string/caster_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/caster_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/checkbox_caster"
+        app:layout_constraintStart_toEndOf="@+id/caster_icon"
+        app:layout_constraintTop_toTopOf="@+id/checkbox_caster"
+        android:layout_marginStart="8dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_beserker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_caster"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_caster"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/beserker_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_beserker_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_beserker"
+        app:layout_constraintStart_toEndOf="@id/checkbox_beserker"
+        app:layout_constraintTop_toTopOf="@id/checkbox_beserker"
+        android:contentDescription="@string/berserker_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/berserker_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_beserker"
+        app:layout_constraintStart_toEndOf="@id/beserker_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_beserker"
+        android:layout_marginStart="8dp"/>
+
+
+    <CheckBox
+        android:id="@+id/checkbox_ruler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_beserker"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_beserker"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/ruler_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_ruler_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_ruler"
+        app:layout_constraintStart_toEndOf="@id/checkbox_ruler"
+        app:layout_constraintTop_toTopOf="@id/checkbox_ruler"
+        android:contentDescription="@string/ruler_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ruler_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_ruler"
+        app:layout_constraintStart_toEndOf="@id/ruler_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_ruler"
+        android:layout_marginStart="8dp"/>
+
+
+    <CheckBox
+        android:id="@+id/checkbox_avenger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/checkbox_ruler"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_ruler"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/avenger_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_avenger_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_avenger"
+        app:layout_constraintStart_toEndOf="@id/checkbox_avenger"
+        app:layout_constraintTop_toTopOf="@id/checkbox_avenger"
+        android:contentDescription="@string/avenger_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/avenger_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_avenger"
+        app:layout_constraintStart_toEndOf="@id/avenger_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_avenger"
+        android:layout_marginStart="8dp"/>
+
+
+    <CheckBox
+        android:id="@+id/checkbox_moon_cancer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@+id/checkbox_avenger"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_avenger"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/moon_cancer_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_mooncancer_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_moon_cancer"
+        app:layout_constraintStart_toEndOf="@id/checkbox_moon_cancer"
+        app:layout_constraintTop_toTopOf="@id/checkbox_moon_cancer"
+        android:contentDescription="@string/moon_cancer_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/moon_cancer_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_moon_cancer"
+        app:layout_constraintStart_toEndOf="@id/moon_cancer_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_moon_cancer"
+        android:layout_marginStart="8dp"/>
+
+
+
+    <CheckBox
+        android:id="@+id/checkbox_alterego"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/checkbox_moon_cancer"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_moon_cancer"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/alterego_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_alterego_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_alterego"
+        app:layout_constraintStart_toEndOf="@id/checkbox_alterego"
+        app:layout_constraintTop_toTopOf="@id/checkbox_alterego"
+        android:contentDescription="@string/alter_ego_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/alter_ego_text"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_alterego"
+        app:layout_constraintStart_toEndOf="@id/alterego_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_alterego"
+        />
+
+
+    <CheckBox
+        android:id="@+id/checkbox_shielder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/checkbox_alterego"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_alterego"
+
+        android:layout_marginTop="8dp"
+        />
+
+    <ImageView
+        android:id="@+id/shielder_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_shielder"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_shielder"
+        app:layout_constraintStart_toEndOf="@id/checkbox_shielder"
+        app:layout_constraintTop_toTopOf="@id/checkbox_shielder"
+        android:contentDescription="@string/shielder_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shielder_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_shielder"
+        app:layout_constraintStart_toEndOf="@id/shielder_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_shielder"
+        android:layout_marginStart="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
