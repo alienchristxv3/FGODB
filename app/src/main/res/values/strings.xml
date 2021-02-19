@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">FGODB</string>
-    <string name="filter_list">Filter</string>
+    <string name="filter_text">Filter</string>
     <string name="search_servant">Search Servant</string>
+    <string name="filter_servant_text">Filter Servants</string>
+    <string name="rarity">Rarity</string>
+    <string name="one_star_symbol">1★</string>
+    <string name="two_star_symbol">2★</string>
+    <string name="three_star_symbol">3★</string>
+    <string name="four_star_symbol">4★</string>
+    <string name="five_star_symbol">5★</string>
 </resources>

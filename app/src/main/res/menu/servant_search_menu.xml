@@ -6,5 +6,11 @@
         android:icon="@drawable/ic_launcher_background"
         android:title="@string/search_servant"
         app:showAsAction="always"
-        app:actionViewClass="android.widget.SearchView"/>
+        app:actionViewClass="android.widget.SearchView"
+        android:orderInCategory="100"/>
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_action_filter"
+        android:title="@string/filter_list"
+        app:showAsAction="collapseActionView"/>
 </menu>

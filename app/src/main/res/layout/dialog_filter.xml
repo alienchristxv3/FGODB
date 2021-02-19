@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/rarity_filter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rarity"
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_one_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/one_star_symbol"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/rarity_filter_title"
+        app:layout_constraintTop_toBottomOf="@id/rarity_filter_title"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_two_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/two_star_symbol"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/checkbox_one_star"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_one_star"
+        android:layout_marginTop="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_three_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/two_star_symbol"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/checkbox_one_star"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_two_star"
+        android:layout_marginTop="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_four_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/four_star_symbol"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/checkbox_one_star"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_three_star"
+        android:layout_marginTop="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_five_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/five_star_symbol"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/checkbox_one_star"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_four_star"
+        android:layout_marginTop="8dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
