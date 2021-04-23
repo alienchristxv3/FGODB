@@ -1,9 +1,11 @@
 package com.steventran.fgodb
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +15,7 @@ import com.squareup.picasso.Picasso
 
 private const val TAG = "FgoFragment"
 
-class ServantListFragment : Fragment() {
+class ServantListFragment : Fragment(), FilterDialogFragment.FilterDialogListener {
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +42,7 @@ class ServantListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         servantListViewModel.servantLiveData.observe(
             viewLifecycleOwner,
-            Observer {servants ->
+            Observer { servants ->
                 servantRecyclerView.adapter = ServantAdapter(servants)
             })
 
@@ -50,7 +52,7 @@ class ServantListFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.servant_search_menu, menu)
         val searchView = menu.findItem(R.id.action_search_servant).actionView as SearchView
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val servantAdapter = servantRecyclerView.adapter as ServantAdapter
                 servantAdapter.filter.filter(query)
@@ -67,6 +69,31 @@ class ServantListFragment : Fragment() {
 
         });
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            R.id.action_filter -> {
+                createFilterDialog()
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+
+    override fun onFilterClick(dialog: DialogFragment) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFilterCancel(dialog: DialogFragment) {
+        TODO("Not yet implemented")
+    }
+
+    fun createFilterDialog() {
+        val dialog = FilterDialogFragment()
+        dialog.show(childFragmentManager, "FilterDialogFragment")
     }
 
     private inner class ServantHolder(view: View): RecyclerView.ViewHolder(view) {
