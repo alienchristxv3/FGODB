@@ -11,6 +11,6 @@
     <item
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_action_filter"
-        android:title="@string/filter_list"
+        android:title="@string/filter_text"
         app:showAsAction="collapseActionView"/>
 </menu>

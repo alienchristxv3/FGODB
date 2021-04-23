@@ -24,5 +24,6 @@
     <string name="alter_ego_text">Alter Ego</string>
     <string name="foreigner_text">Foreigner</string>
     <string name="shielder_text">Shielder</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
