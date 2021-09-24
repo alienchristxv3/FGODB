@@ -29,7 +29,7 @@ class DetailedServantDeserializer: JsonDeserializer<DetailedServant> {
         servantAscensions?.keySet()?.forEach {key ->
             Log.d(TAG, "Fetched servantAscension key: $key")
             servantAscensions?.get(key)?.asString?.let {
-                // grabs the links of the ascension urls buy obtaining the keys and using them
+                // grabs the links of the ascension urls by obtaining the keys and using them
                 servantAscensionGraphUrls.add(
                     it
                 )
