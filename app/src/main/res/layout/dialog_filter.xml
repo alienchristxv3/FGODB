@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/rarity_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="checkbox_one_star,checkbox_two_star,
+         checkbox_three_star, checkbox_four_star, checkbox_five_star"/>
     <TextView
         android:id="@+id/rarity_filter_title"
         android:layout_width="wrap_content"
@@ -29,8 +35,7 @@
         app:layout_constraintStart_toStartOf="@+id/rarity_filter_title"
         app:layout_constraintTop_toBottomOf="@id/rarity_filter_title"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onClickRarity"/>
+        android:layout_marginTop="8dp"/>
     <CheckBox
         android:id="@+id/checkbox_two_star"
         android:layout_width="wrap_content"
@@ -90,6 +95,7 @@
         app:layout_constraintTop_toBottomOf="@id/class_filter_title"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:tag="@string/_saber"
         />
 
     <ImageView
@@ -122,6 +128,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_saber"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_lancer"
         />
 
     <ImageView
@@ -154,6 +161,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_lancer"
 
         android:layout_marginTop="8dp"
+         android:tag="@string/_archer"
         />
 
     <ImageView
@@ -186,6 +194,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_archer"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_rider"
         />
 
     <ImageView
@@ -218,6 +227,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_rider"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_assassin"
         />
 
     <ImageView
@@ -250,7 +260,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/checkbox_assassin"
 
-        app:layout_constraintTop_toBottomOf="@id/checkbox_assassin" />
+        app:layout_constraintTop_toBottomOf="@id/checkbox_assassin"
+        android:tag="@string/_caster"/>
 
     <ImageView
         android:id="@+id/caster_icon"
@@ -283,6 +294,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_caster"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_beserker"
         />
 
     <ImageView
@@ -317,6 +329,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_beserker"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_ruler"
         />
 
     <ImageView
@@ -351,6 +364,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_ruler"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_avenger"
         />
 
     <ImageView
@@ -385,6 +399,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_avenger"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_moon_cancer"
         />
 
     <ImageView
@@ -420,6 +435,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_moon_cancer"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_alter_ego"
         />
 
     <ImageView
@@ -455,6 +471,7 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox_alterego"
 
         android:layout_marginTop="8dp"
+        android:tag="@string/_shielder"
         />
 
     <ImageView
@@ -477,5 +494,38 @@
         app:layout_constraintBottom_toBottomOf="@id/checkbox_shielder"
         app:layout_constraintStart_toEndOf="@id/shielder_icon"
         app:layout_constraintTop_toTopOf="@id/checkbox_shielder"
+        android:layout_marginStart="8dp"/>
+    <CheckBox
+        android:id="@+id/checkbox_foreigner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="@id/checkbox_shielder"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_shielder"
+
+        android:layout_marginTop="8dp"
+        android:tag="@string/_foreigner"
+        />
+
+    <ImageView
+        android:id="@+id/foreigner_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/class_foreigner_gold"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_foreigner"
+        app:layout_constraintStart_toEndOf="@id/checkbox_foreigner"
+        app:layout_constraintTop_toTopOf="@id/checkbox_foreigner"
+        android:contentDescription="@string/foreigner_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foreigner_text"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox_foreigner"
+        app:layout_constraintStart_toEndOf="@id/foreigner_icon"
+        app:layout_constraintTop_toTopOf="@id/checkbox_foreigner"
         android:layout_marginStart="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

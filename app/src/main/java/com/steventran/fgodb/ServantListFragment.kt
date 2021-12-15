@@ -18,6 +18,8 @@ private const val TAG = "FgoFragment"
 class ServantListFragment : Fragment(), FilterDialogFragment.FilterDialogListener {
     private lateinit var servantListViewModel: ServantListViewModel
     private lateinit var servantRecyclerView: RecyclerView
+    private lateinit var classFilters: List<String>
+    private lateinit var rarityFilter: List<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,7 +69,7 @@ class ServantListFragment : Fragment(), FilterDialogFragment.FilterDialogListene
                 return false
             }
 
-        });
+        })
 
     }
 
@@ -83,15 +85,21 @@ class ServantListFragment : Fragment(), FilterDialogFragment.FilterDialogListene
             }
         }
 
-    override fun onFilterClick(dialog: DialogFragment) {
-        TODO("Not yet implemented")
+    override fun onFilterClick(dialog: FilterDialogFragment) {
+        classFilters = dialog.classFilters
+        rarityFilter = dialog.rarityFilters
+        val servantAdapter = servantRecyclerView.adapter as ServantAdapter
+        servantAdapter.filter.filter("")
+        servantAdapter.notifyDataSetChanged()
+
     }
 
-    override fun onFilterCancel(dialog: DialogFragment) {
-        TODO("Not yet implemented")
+    override fun onFilterCancel(dialog: FilterDialogFragment) {
+        classFilters = emptyList()
+        rarityFilter = emptyList()
     }
 
-    fun createFilterDialog() {
+    private fun createFilterDialog() {
         val dialog = FilterDialogFragment()
         dialog.show(childFragmentManager, "FilterDialogFragment")
     }
@@ -227,11 +235,33 @@ class ServantListFragment : Fragment(), FilterDialogFragment.FilterDialogListene
                         var filteredList = mutableListOf<Servant>()
                         servants.forEach {servant: Servant ->
                             if(servant.servantName.toLowerCase().contains(charSequence.toString().toLowerCase())) {
-                                filteredList.add(servant)
+                                if (rarityFilter.isEmpty() && classFilters.isEmpty()) {
+                                    filteredList.add(servant)
+                                }
+                                else {
+                                    if (rarityFilter.isEmpty() && classFilters.isNotEmpty()) {
+                                        if (classFilters.contains(servant.className)) {
+                                            filteredList.add(servant)
+                                        }
+                                    }
+                                    else if (classFilters.isEmpty() && rarityFilter.isNotEmpty()) {
+                                        if (rarityFilter.contains(servant.rarity)) {
+                                            filteredList.add(servant)
+                                        }
+                                    }
+                                    else {
+                                        if (rarityFilter.contains(servant.rarity) &&
+                                            classFilters.contains(servant.className)) {
+                                            filteredList.add(servant)
+                                        }
+                                    }
+                                }
                             }
                         }
                         filteredList
                     }
+
+
 
                     val filteredResults = FilterResults()
                     filteredResults.values = filteredServants

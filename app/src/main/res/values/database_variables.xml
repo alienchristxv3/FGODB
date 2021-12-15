@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="_saber">saber</string>
+    <string name="_archer">archer</string>
+    <string name="_lancer">lancer</string>
+    <string name="_rider">rider</string>
+    <string name="_caster">caster</string>
+    <string name="_assassin">assassin</string>
+    <string name="_beserker">beserker</string>
+    <string name="_shielder">shielder</string>
+    <string name="_ruler">ruler</string>
+    <string name="_alter_ego">alterEgo</string>
+    <string name="_avenger">avenger</string>
+    <string name="_moon_cancer">moonCancer</string>
+    <string name="_foreigner">foreigner</string>
+</resources>
